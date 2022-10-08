@@ -14,9 +14,9 @@ class SecondViewController: UIViewController {
         
         let tableViewRaM = UITableView()
         tableViewRaM.translatesAutoresizingMaskIntoConstraints = false
-        tableViewRaM.backgroundColor = .white
+        tableViewRaM.backgroundColor = .black
         view.addSubview(tableViewRaM)
-        tableViewRaM.register(UITableViewCell.self, forCellReuseIdentifier: "cellId")
+        tableViewRaM.register(ThirtyDayCell.self, forCellReuseIdentifier: "cellId")
         let tableViewRaMConstraints = [
             tableViewRaM.topAnchor.constraint(equalTo: view.topAnchor),
             tableViewRaM.bottomAnchor.constraint(equalTo: view.bottomAnchor),
@@ -24,12 +24,35 @@ class SecondViewController: UIViewController {
             tableViewRaM.trailingAnchor.constraint(equalTo: view.trailingAnchor)
         ]
         NSLayoutConstraint.activate(tableViewRaMConstraints)
+        
+        func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+                // 1
+                return 10
+            }
+        func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+                // 2
+                let cell = tableViewRaM.dequeueReusableCell(withIdentifier: "cellId", for: indexPath)
+                cell.backgroundColor = UIColor.white
+                return cell
+            }
+    
+        
         }
         
     
     }
     
-   
+class ThirtyDayCell: UITableViewCell {
+    
+    override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
+        super.init(style: style, reuseIdentifier: reuseIdentifier)
+    }
+    
+    required init?(coder aDecoder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
+}
     
     
     
