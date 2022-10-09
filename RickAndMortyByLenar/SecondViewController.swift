@@ -6,17 +6,21 @@
 //
 
 import UIKit
-class SecondViewController: UIViewController {
+class SecondViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
     
+    let tableViewRaM = UITableView()
+    
+    var data = [String] ()
+   
     override func viewDidLoad() {
+        
         super.viewDidLoad()
-        
-        
-        let tableViewRaM = UITableView()
-        tableViewRaM.translatesAutoresizingMaskIntoConstraints = false
-        tableViewRaM.backgroundColor = .black
         view.addSubview(tableViewRaM)
-        tableViewRaM.register(ThirtyDayCell.self, forCellReuseIdentifier: "cellId")
+        for x in 0...100 {
+            data.append("Some data \(x)")
+        }
+        
+        tableViewRaM.translatesAutoresizingMaskIntoConstraints = false
         let tableViewRaMConstraints = [
             tableViewRaM.topAnchor.constraint(equalTo: view.topAnchor),
             tableViewRaM.bottomAnchor.constraint(equalTo: view.bottomAnchor),
@@ -25,34 +29,32 @@ class SecondViewController: UIViewController {
         ]
         NSLayoutConstraint.activate(tableViewRaMConstraints)
         
-        func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-                // 1
-                return 10
-            }
-        func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-                // 2
-                let cell = tableViewRaM.dequeueReusableCell(withIdentifier: "cellId", for: indexPath)
-                cell.backgroundColor = UIColor.white
-                return cell
-            }
-    
-        
+        tableViewRaM.delegate = self
+        tableViewRaM.dataSource = self
+        tableViewRaM.backgroundColor = .black
+        tableViewRaM.register(UITableViewCell.self, forCellReuseIdentifier: "cellID")
         }
+    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return data.count
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableViewRaM.dequeueReusableCell(withIdentifier: "cellID", for: indexPath)
         
-    
+        cell.textLabel?.text = data[indexPath.row]
+        return cell
     }
     
-class ThirtyDayCell: UITableViewCell {
-    
-    override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
-        super.init(style: style, reuseIdentifier: reuseIdentifier)
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        tableViewRaM.deselectRow(at: indexPath, animated: true)
+        print("cell tapped")
     }
     
-    required init?(coder aDecoder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
+        
     }
     
-}
+
     
     
     
