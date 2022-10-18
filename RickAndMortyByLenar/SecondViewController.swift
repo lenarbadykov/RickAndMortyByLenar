@@ -6,53 +6,69 @@
 //
 
 import UIKit
-class SecondViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
+
+class SecondViewController: UIViewController, UITableViewDelegate,  UITableViewDataSource {
     
-    let tableViewRaM = UITableView()
+    let tableview: UITableView = {
+        let tv = UITableView()
+        tv.backgroundColor = UIColor.white
+        tv.translatesAutoresizingMaskIntoConstraints = false
+    //  tv.separatorColor = UIColor.blue
+            return tv
+}()
     
-    var data = [String] ()
-   
     override func viewDidLoad() {
-        
         super.viewDidLoad()
-        view.addSubview(tableViewRaM)
-        for x in 0...100 {
-            data.append("Some data \(x)")
-        }
+        setupTableView()
+    }
+
+    func setupTableView() {
+        tableview.delegate = self
+        tableview.dataSource = self
+        tableview.register(CustomCell.self, forCellReuseIdentifier: "cellId")
         
-        tableViewRaM.translatesAutoresizingMaskIntoConstraints = false
-        let tableViewRaMConstraints = [
-            tableViewRaM.topAnchor.constraint(equalTo: view.topAnchor),
-            tableViewRaM.bottomAnchor.constraint(equalTo: view.bottomAnchor),
-            tableViewRaM.leadingAnchor.constraint(equalTo: view.leadingAnchor),
-            tableViewRaM.trailingAnchor.constraint(equalTo: view.trailingAnchor)
-        ]
-        NSLayoutConstraint.activate(tableViewRaMConstraints)
+        view.addSubview(tableview)
         
-        tableViewRaM.delegate = self
-        tableViewRaM.dataSource = self
-        tableViewRaM.backgroundColor = .black
-        tableViewRaM.register(UITableViewCell.self, forCellReuseIdentifier: "cellID")
-        }
+        NSLayoutConstraint.activate([
+            tableview.topAnchor.constraint(equalTo: self.view.topAnchor),
+            tableview.bottomAnchor.constraint(equalTo: self.view.bottomAnchor),
+            tableview.rightAnchor.constraint(equalTo: self.view.rightAnchor),
+            tableview.leftAnchor.constraint(equalTo: self.view.leftAnchor)
+        ])
+    }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return data.count
+        // 1
+        return 10
+    }
+    
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 100
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableViewRaM.dequeueReusableCell(withIdentifier: "cellID", for: indexPath)
-        
-        cell.textLabel?.text = data[indexPath.row]
+            // 2
+        let cell = tableview.dequeueReusableCell(withIdentifier: "cellId", for: indexPath) as! CustomCell
+        cell.nameLable.text = "Name:"
+        cell.statusLable.text = "Status:"
+        cell.genderLable.text = "Gender:"
+        cell.avatar.backgroundColor = .green //???
+        cell.backgroundColor = UIColor.white
         return cell
-    }
+        }
+
+}
     
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        tableViewRaM.deselectRow(at: indexPath, animated: true)
-        print("cell tapped")
-    }
+    
+    
+    
+//    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+//        tableViewRaM.deselectRow(at: indexPath, animated: true)
+//        print("cell tapped")
+//    }
     
         
-    }
+    
     
 
     
