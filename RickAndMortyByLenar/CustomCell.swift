@@ -51,6 +51,8 @@ class CustomCell: UITableViewCell {
         return avatarImage
     }()
     
+    
+    
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         

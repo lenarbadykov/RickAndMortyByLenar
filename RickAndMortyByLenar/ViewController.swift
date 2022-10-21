@@ -8,10 +8,14 @@
 import UIKit
 
 class ViewController: UIViewController {
-
+    
+    private let loginTextField = UITextField()
+    private let passwordTextField = UITextField()
+    private let button = UIButton()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-       
+        
         // фон
         let backgroundImageView = UIImageView()
         backgroundImageView.image = UIImage(named: "planet")
@@ -26,22 +30,24 @@ class ViewController: UIViewController {
         NSLayoutConstraint.activate(constraints)
         
         // логин
-        let loginTextField = UITextField()
+        
         loginTextField.borderStyle = .roundedRect
         loginTextField.placeholder = "Nick"
         loginTextField.textAlignment = .center
+        loginTextField.addTarget(self, action: #selector(loginTextFieldDidChange(_:)), for: .editingChanged)
         loginTextField.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(loginTextField)
         loginTextField.centerXAnchor.constraint(equalTo: view.centerXAnchor, constant: 0).isActive = true
         loginTextField.topAnchor.constraint(equalTo: view.topAnchor, constant: 220).isActive = true
         loginTextField.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 70).isActive = true
         loginTextField.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -70).isActive = true
-
+        
         // пароль
-        let passwordTextField = UITextField()
         passwordTextField.borderStyle = .roundedRect
         passwordTextField.placeholder = "PassWord"
         passwordTextField.textAlignment = .center
+        passwordTextField.isSecureTextEntry = true
+        passwordTextField.addTarget(self, action: #selector(passwordTextFieldDidChange(_:)), for: .editingChanged)
         passwordTextField.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(passwordTextField)
         passwordTextField.centerXAnchor.constraint(equalTo: view.centerXAnchor, constant: 0).isActive = true
@@ -50,7 +56,6 @@ class ViewController: UIViewController {
         passwordTextField.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -70).isActive = true
         
         // кнопка
-        let button = UIButton() 
         button.layer.cornerRadius = 5
         button.setTitle("Don't", for: .normal)
         button.setTitleColor(.black, for: .normal)
@@ -62,21 +67,26 @@ class ViewController: UIViewController {
         button.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 70).isActive = true
         button.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -70).isActive = true
         button.addTarget(self, action: #selector(pressTheButton), for: .touchUpInside)
-        
-        
-        }
-   
-    // нажатие
-    @objc func pressTheButton() {
-    let press = SecondViewController()
-        present(press, animated: true, completion: nil)
-        
-        
+        updateButton()
     }
     
+    // нажатие
+    @objc func pressTheButton() {
+        navigationController?.setViewControllers([SecondViewController()], animated: true)
+    }
     
+    @objc func passwordTextFieldDidChange(_ textField: UITextField) {
+        updateButton()
+    }
     
-  
+    @objc func loginTextFieldDidChange(_ textField: UITextField) {
+        updateButton()
+    }
+    
+    private func updateButton() {
+        button.isEnabled = loginTextField.hasText && passwordTextField.hasText
+    }
+    
 }
 
 
