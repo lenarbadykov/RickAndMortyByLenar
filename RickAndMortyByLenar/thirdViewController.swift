@@ -8,7 +8,7 @@
 import UIKit
 class ThirdViewConroller: UIViewController, UITableViewDelegate,  UITableViewDataSource {
     
-    
+    let character: CharacterModel
     
     let tableview2: UITableView = {
         let tv2 = UITableView()
@@ -17,7 +17,14 @@ class ThirdViewConroller: UIViewController, UITableViewDelegate,  UITableViewDat
         return tv2
     }()
     
+    init(character: CharacterModel) {
+        self.character = character
+        super.init(nibName: nil, bundle: nil)
+    }
     
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()

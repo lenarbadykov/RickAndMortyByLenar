@@ -11,6 +11,11 @@
 		5F97EDFD28EDC62E00142D74 /* SecondViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F97EDFC28EDC62E00142D74 /* SecondViewController.swift */; };
 		5FA34D8F28F559FF00A4D063 /* thirdViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5FA34D8E28F559FF00A4D063 /* thirdViewController.swift */; };
 		5FDBC6312901B02800E3FA6D /* CustomCell2.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5FDBC6302901B02800E3FA6D /* CustomCell2.swift */; };
+		5FDBC63329024C7300E3FA6D /* APIClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5FDBC63229024C7300E3FA6D /* APIClient.swift */; };
+		5FDBC6352903524C00E3FA6D /* CharacterModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5FDBC6342903524C00E3FA6D /* CharacterModel.swift */; };
+		5FDBC637290352E600E3FA6D /* CharactersResponseModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5FDBC636290352E600E3FA6D /* CharactersResponseModel.swift */; };
+		5FDBC639290359A700E3FA6D /* CharactersRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5FDBC638290359A700E3FA6D /* CharactersRepository.swift */; };
+		5FDBC63C2903D6FF00E3FA6D /* SDWebImage in Frameworks */ = {isa = PBXBuildFile; productRef = 5FDBC63B2903D6FF00E3FA6D /* SDWebImage */; };
 		5FF5518328D20DAA00FC9E75 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5FF5518228D20DAA00FC9E75 /* AppDelegate.swift */; };
 		5FF5518528D20DAA00FC9E75 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5FF5518428D20DAA00FC9E75 /* SceneDelegate.swift */; };
 		5FF5518728D20DAA00FC9E75 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5FF5518628D20DAA00FC9E75 /* ViewController.swift */; };
@@ -43,6 +48,10 @@
 		5F97EDFC28EDC62E00142D74 /* SecondViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecondViewController.swift; sourceTree = "<group>"; };
 		5FA34D8E28F559FF00A4D063 /* thirdViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = thirdViewController.swift; sourceTree = "<group>"; };
 		5FDBC6302901B02800E3FA6D /* CustomCell2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomCell2.swift; sourceTree = "<group>"; };
+		5FDBC63229024C7300E3FA6D /* APIClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIClient.swift; sourceTree = "<group>"; };
+		5FDBC6342903524C00E3FA6D /* CharacterModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CharacterModel.swift; sourceTree = "<group>"; };
+		5FDBC636290352E600E3FA6D /* CharactersResponseModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CharactersResponseModel.swift; sourceTree = "<group>"; };
+		5FDBC638290359A700E3FA6D /* CharactersRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CharactersRepository.swift; sourceTree = "<group>"; };
 		5FF5517F28D20DAA00FC9E75 /* RickAndMortyByLenar.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = RickAndMortyByLenar.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		5FF5518228D20DAA00FC9E75 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		5FF5518428D20DAA00FC9E75 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -62,6 +71,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5FDBC63C2903D6FF00E3FA6D /* SDWebImage in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -112,6 +122,10 @@
 				5FA34D8E28F559FF00A4D063 /* thirdViewController.swift */,
 				5F92230028FA2CF100724E04 /* CustomCell.swift */,
 				5FDBC6302901B02800E3FA6D /* CustomCell2.swift */,
+				5FDBC63229024C7300E3FA6D /* APIClient.swift */,
+				5FDBC6342903524C00E3FA6D /* CharacterModel.swift */,
+				5FDBC636290352E600E3FA6D /* CharactersResponseModel.swift */,
+				5FDBC638290359A700E3FA6D /* CharactersRepository.swift */,
 				5FF5518B28D20DAB00FC9E75 /* Assets.xcassets */,
 				5FF5518D28D20DAB00FC9E75 /* LaunchScreen.storyboard */,
 				5FF5519028D20DAB00FC9E75 /* Info.plist */,
@@ -152,6 +166,9 @@
 			dependencies = (
 			);
 			name = RickAndMortyByLenar;
+			packageProductDependencies = (
+				5FDBC63B2903D6FF00E3FA6D /* SDWebImage */,
+			);
 			productName = RickAndMortyByLenar;
 			productReference = 5FF5517F28D20DAA00FC9E75 /* RickAndMortyByLenar.app */;
 			productType = "com.apple.product-type.application";
@@ -224,6 +241,9 @@
 				Base,
 			);
 			mainGroup = 5FF5517628D20DAA00FC9E75;
+			packageReferences = (
+				5FDBC63A2903D6FF00E3FA6D /* XCRemoteSwiftPackageReference "SDWebImage" */,
+			);
 			productRefGroup = 5FF5518028D20DAA00FC9E75 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -268,9 +288,13 @@
 			files = (
 				5F97EDFD28EDC62E00142D74 /* SecondViewController.swift in Sources */,
 				5FF5518728D20DAA00FC9E75 /* ViewController.swift in Sources */,
+				5FDBC63329024C7300E3FA6D /* APIClient.swift in Sources */,
 				5FA34D8F28F559FF00A4D063 /* thirdViewController.swift in Sources */,
 				5FDBC6312901B02800E3FA6D /* CustomCell2.swift in Sources */,
+				5FDBC639290359A700E3FA6D /* CharactersRepository.swift in Sources */,
 				5F92230128FA2CF100724E04 /* CustomCell.swift in Sources */,
+				5FDBC637290352E600E3FA6D /* CharactersResponseModel.swift in Sources */,
+				5FDBC6352903524C00E3FA6D /* CharacterModel.swift in Sources */,
 				5FF5518328D20DAA00FC9E75 /* AppDelegate.swift in Sources */,
 				5FF5518528D20DAA00FC9E75 /* SceneDelegate.swift in Sources */,
 			);
@@ -602,6 +626,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		5FDBC63A2903D6FF00E3FA6D /* XCRemoteSwiftPackageReference "SDWebImage" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/SDWebImage/SDWebImage.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 5.0.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		5FDBC63B2903D6FF00E3FA6D /* SDWebImage */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 5FDBC63A2903D6FF00E3FA6D /* XCRemoteSwiftPackageReference "SDWebImage" */;
+			productName = SDWebImage;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 5FF5517728D20DAA00FC9E75 /* Project object */;
 }

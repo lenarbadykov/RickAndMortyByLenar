@@ -9,13 +9,15 @@ import UIKit
 
 class CustomCell2: UITableViewCell {
     
+    var character: CharacterModel?
+    
     let cellView2: UIView = {
-            let view2 = UIView()
-            view2.backgroundColor = UIColor.black
-            view2.layer.cornerRadius = 10
-            view2.translatesAutoresizingMaskIntoConstraints = false
-            return view2
-        }()
+        let view2 = UIView()
+        view2.backgroundColor = UIColor.black
+        view2.layer.cornerRadius = 10
+        view2.translatesAutoresizingMaskIntoConstraints = false
+        return view2
+    }()
     
     
     let avatar2: UIImageView = {
@@ -35,13 +37,13 @@ class CustomCell2: UITableViewCell {
         label4.translatesAutoresizingMaskIntoConstraints = false
         return label4
     }()
-
+    
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         
         setupView2()
-
+        
     }
     
     required init?(coder: NSCoder) {
@@ -65,11 +67,13 @@ class CustomCell2: UITableViewCell {
         episodes.widthAnchor.constraint(equalToConstant: 70).isActive = true
         episodes.topAnchor.constraint(equalTo: avatar2.bottomAnchor, constant: 10).isActive = true
         episodes.centerXAnchor.constraint(equalTo: cellView2.centerXAnchor).isActive = true
-    
+        
         avatar2.heightAnchor.constraint(equalToConstant:100).isActive = true
         avatar2.widthAnchor.constraint(equalToConstant: 150).isActive = true
         avatar2.centerXAnchor.constraint(equalTo: cellView2.centerXAnchor).isActive = true
         avatar2.topAnchor.constraint(equalTo: cellView2.topAnchor, constant: 10).isActive = true
-}
+    }
+    
+    
     
 }

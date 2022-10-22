@@ -6,8 +6,10 @@
 //
 
 import UIKit
+import SDWebImage
 
 class CustomCell: UITableViewCell {
+    var character: CharacterModel?
     
     let cellView: UIView = {
             let view = UIView()
@@ -17,7 +19,7 @@ class CustomCell: UITableViewCell {
             return view
         }()
         
-    let nameLable: UILabel = {
+    let nameLabel: UILabel = {
         let label = UILabel()
         // label.text = "Name"
         label.textColor = UIColor.white
@@ -26,7 +28,7 @@ class CustomCell: UITableViewCell {
         return label
     }()
     
-    let statusLable: UILabel = {
+    let statusLabel: UILabel = {
         let lableTwo = UILabel()
         lableTwo.textColor = UIColor.white
         lableTwo.font = UIFont.boldSystemFont(ofSize: 16)
@@ -34,7 +36,7 @@ class CustomCell: UITableViewCell {
         return lableTwo
     }()
     
-    let genderLable: UILabel = {
+    let genderLabel: UILabel = {
         let lableThree = UILabel()
         lableThree.textColor = UIColor.white
         lableThree.font = UIFont.boldSystemFont(ofSize: 16)
@@ -59,43 +61,39 @@ class CustomCell: UITableViewCell {
         setupView()
 
     }
+    
     func setupView() {
-        addSubview(cellView)
-        cellView.addSubview(nameLable)
-        cellView.addSubview(statusLable)
-        cellView.addSubview(genderLable)
+        contentView.addSubview(cellView)
+        cellView.addSubview(nameLabel)
+        cellView.addSubview(statusLabel)
+        cellView.addSubview(genderLabel)
         cellView.addSubview(avatar)
         self.selectionStyle = .none
         
         NSLayoutConstraint.activate([
-            cellView.topAnchor.constraint(equalTo: self.topAnchor, constant: 20),
-            cellView.rightAnchor.constraint(equalTo: self.rightAnchor, constant: -10),
-            cellView.leftAnchor.constraint(equalTo: self.leftAnchor, constant: 10),
-            cellView.bottomAnchor.constraint(equalTo: self.bottomAnchor),
+            cellView.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 10),
+            cellView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -10),
+            cellView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 10),
+            cellView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -10),
         ])
     
+        nameLabel.topAnchor.constraint(equalTo: cellView.topAnchor, constant: 10).isActive = true
+        nameLabel.leadingAnchor.constraint(equalTo: avatar.trailingAnchor, constant: 10).isActive = true
+        nameLabel.trailingAnchor.constraint(equalTo: cellView.trailingAnchor, constant: -10).isActive = true
         
+        statusLabel.topAnchor.constraint(equalTo: nameLabel.bottomAnchor, constant: 4).isActive = true
+        statusLabel.leadingAnchor.constraint(equalTo: avatar.trailingAnchor, constant: 10).isActive = true
+        statusLabel.trailingAnchor.constraint(equalTo: cellView.trailingAnchor, constant: -10).isActive = true
         
-        
-        nameLable.heightAnchor.constraint(equalToConstant: 20).isActive = true
-        nameLable.widthAnchor.constraint(equalToConstant: 100).isActive = true
-        nameLable.topAnchor.constraint(equalTo: cellView.topAnchor, constant: 10).isActive = true
-        nameLable.leftAnchor.constraint(equalTo: cellView.leftAnchor, constant: 100).isActive = true
-        
-        statusLable.heightAnchor.constraint(equalToConstant: 20).isActive = true
-        statusLable.widthAnchor.constraint(equalToConstant: 100).isActive = true
-        statusLable.topAnchor.constraint(equalTo: nameLable.bottomAnchor, constant: 2).isActive = true
-        statusLable.leftAnchor.constraint(equalTo: cellView.leftAnchor, constant: 100).isActive = true
-
-        genderLable.heightAnchor.constraint(equalToConstant: 20).isActive = true
-        genderLable.widthAnchor.constraint(equalToConstant: 100).isActive = true
-        genderLable.topAnchor.constraint(equalTo: statusLable.bottomAnchor, constant: 2).isActive = true
-        genderLable.leftAnchor.constraint(equalTo: cellView.leftAnchor, constant: 100).isActive = true
+        genderLabel.topAnchor.constraint(equalTo: statusLabel.bottomAnchor, constant: 4).isActive = true
+        genderLabel.leadingAnchor.constraint(equalTo: avatar.trailingAnchor, constant: 10).isActive = true
+        genderLabel.trailingAnchor.constraint(equalTo: cellView.trailingAnchor, constant: -10).isActive = true
+        genderLabel.bottomAnchor.constraint(lessThanOrEqualTo: cellView.bottomAnchor, constant: -10).isActive = true
         
         avatar.heightAnchor.constraint(equalToConstant:60).isActive = true
         avatar.widthAnchor.constraint(equalToConstant: 60).isActive = true
         avatar.centerYAnchor.constraint(equalTo: cellView.centerYAnchor).isActive = true
-        avatar.leftAnchor.constraint(equalTo: cellView.leftAnchor, constant: 10).isActive = true
+        avatar.leadingAnchor.constraint(equalTo: cellView.leadingAnchor, constant: 10).isActive = true
         
     }
     
@@ -105,7 +103,19 @@ class CustomCell: UITableViewCell {
         fatalError("init(coder:) has not been implemented")
     }
     
-    
-    
+    func setCharacter(characterModel: CharacterModel) {
+        self.character = characterModel
+        nameLabel.text = "Name: \(characterModel.name)"
+        statusLabel.text = "Status: \(characterModel.status)"
+        genderLabel.text = "Gender: \(characterModel.gender)"
+        avatar.backgroundColor = .green 
+        backgroundColor = UIColor.white
+        if let imageUrl = URL(string: characterModel.image) {
+            avatar.sd_setImage(with: imageUrl)
+        } else {
+            avatar.image = nil
+        }
+        
+    }
     
 }

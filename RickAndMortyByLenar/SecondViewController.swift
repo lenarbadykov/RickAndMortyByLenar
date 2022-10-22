@@ -8,7 +8,8 @@
 import UIKit
 
 class SecondViewController: UIViewController, UITableViewDelegate,  UITableViewDataSource {
-    
+    var characters = [CharacterModel]()
+    let charactersRepository = CharactersRepository(apiClient: APIClient())
     let tableview: UITableView = {
         let tv = UITableView()
         tv.backgroundColor = UIColor.white
@@ -22,16 +23,24 @@ class SecondViewController: UIViewController, UITableViewDelegate,  UITableViewD
         setupTableView()
         setNavigationBar() // navigation bar
         
+        charactersRepository.getCharacters { result in
+            switch result {
+            case .success(let characters):
+                self.characters = characters
+                self.tableview.reloadData()
+            case .failure(let error):
+                print("\(self) retrive error: \(error)")
+            }
+        }
+       
     }
 
     //navigation bar
     func setNavigationBar() {
-               
-        let doneItem = UIBarButtonItem(barButtonSystemItem: UIBarButtonItem.SystemItem.done, target: nil, action: #selector(done))
-        navigationController?.navigationItem.rightBarButtonItem = doneItem
+        self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Log out", style: .done, target: self, action: #selector(logOutTapped))
     }
 
-    @objc func done() {
+    @objc func logOutTapped() {
         navigationController?.setViewControllers([ViewController()], animated: true)
 
     }
@@ -54,28 +63,22 @@ class SecondViewController: UIViewController, UITableViewDelegate,  UITableViewD
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        
-        return 10
+        return characters.count
     }
     
-    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 100
-    }
+
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let character = characters[indexPath.row]
         let cell = tableview.dequeueReusableCell(withIdentifier: "cellId", for: indexPath) as! CustomCell
-        
-        cell.nameLable.text = "Name:"
-        cell.statusLable.text = "Status:"
-        cell.genderLable.text = "Gender:"
-        cell.avatar.backgroundColor = .green //???
-        cell.backgroundColor = UIColor.white
+        cell.setCharacter(characterModel: character)
         return cell
         }
 
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableview.deselectRow(at: indexPath, animated: true)
-        navigationController?.pushViewController(ThirdViewConroller(), animated: true)
+        let character = characters[indexPath.row]
+        navigationController?.pushViewController(ThirdViewConroller(character: character), animated: true)
     }
 }
     
